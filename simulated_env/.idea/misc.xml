@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.7.2 (/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/bin/python3.7)" project-jdk-type="Python SDK" />
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings sdk-home="/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7">
+        <envs>
+          <env key="PYTHONPATH" value="&quot;/Users/ourokutaira/Desktop/InfoCom/Code/&quot;" />
+        </envs>
+        <option name="mySdkHome" value="/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7" />
+        <option name="myEnvs">
+          <map>
+            <entry key="PYTHONPATH" value="&quot;/Users/ourokutaira/Desktop/InfoCom/Code/&quot;" />
+          </map>
+        </option>
+        <option name="myAddSourceRoots" value="true" />
+      </console-settings>
+    </option>
+  </component>
+</project>
