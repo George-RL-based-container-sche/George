@@ -286,11 +286,11 @@ def train(params):
             tput = (sim.predict(tput_state.reshape(-1, env.NUM_APPS)) * tput_state).sum() / NUM_CONTAINERS
             assert sum(sum(env.state)) == NUM_CONTAINERS
             assert (env.state.sum(0) == source_batch_).all()
-            list_check_per_app = (env.state > 1).sum() + max((env.state - 1).max(), 0)
-            list_check_sum = sum(env.state.sum(1) > params['container_limitation per node']) \
-                             + max(max(env.state.sum(1) - params['container_limitation per node']), 0)
-            list_check_coex = sum((env.state[:, 1] > 0) * (env.state[:, 2] > 0))
-            list_check = list_check_sum + list_check_coex + list_check_per_app
+            list_check = 0
+            for node in range(NUM_NODES):
+                for app in range(env.NUM_APPS):
+                    if env.state[node, :].sum() > params['container_limitation per node'] or env.state[node, app] > 1 or (app == 1 and env.state[node, 2] > 0) or (app == 2 and env.state[node, 1] > 0):
+                        list_check += env.state[node, app]
             list_check_ratio = -1.0 * list_check / NUM_CONTAINERS
         else:
             tput = 0

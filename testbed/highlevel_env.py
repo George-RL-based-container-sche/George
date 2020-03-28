@@ -116,12 +116,17 @@ class LraClusterEnv():
         else:
             total_tput = 0
         state = state_all
-        list_check_per_app = (state > 1).sum()  # + max((env.state - 1).max(), 0)
-        list_check_sum = sum(state.sum(1) > 8)  # + max(max(env.state.sum(1) - params['container_limitation per node']), 0)
-        list_check_coex = sum((state[:, 1] > 0) * (state[:, 2] > 0))
-        list_check = list_check_sum + list_check_coex + list_check_per_app
+        # list_check_per_app = (state > 1).sum()  # + max((env.state - 1).max(), 0)
+        # list_check_sum = sum(state.sum(1) > 8)  # + max(max(env.state.sum(1) - params['container_limitation per node']), 0)
+        # list_check_coex = sum((state[:, 1] > 0) * (state[:, 2] > 0))
+        # list_check = list_check_sum + list_check_coex + list_check_per_app
+        list_check = 0
+        for node in range(self.NUM_NODES * 27):
+            for app in range(self.NUM_APPS):
+                if state[node, :].sum() > 8 or state[node, app] > 1 or (app == 1 and state[node, 2] > 0) or (app == 2 and state[node, 1] > 0):
+                    list_check += state[node, app]
 
-        return total_tput, list_check_sum, list_check_coex, list_check_per_app, list_check
+        return total_tput, 0, 0, 0, list_check
 
     def get_tput_total_env(self, getTput=True):
         self. getTput = getTput
